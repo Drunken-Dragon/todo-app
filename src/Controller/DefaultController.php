@@ -2,14 +2,19 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
+    /**
+     * @Route("/")
+     */
+
     public function index()
     {
-        return $this->render('base.html.twig');
-//        return new Response('hello');
+        $result = $this->getDB()->fetchAll('SELECT * FROM  users');
+
+        return new Response(print_r($result, true));
     }
 }
