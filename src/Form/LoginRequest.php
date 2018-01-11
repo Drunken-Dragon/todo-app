@@ -4,7 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\Extension\Validator\Constraints as Assert;
 
-class SignupRequest
+class LoginRequest
 {
     /**
      * @Assert\NotBlank()
