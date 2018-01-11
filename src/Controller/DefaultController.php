@@ -13,8 +13,9 @@ class DefaultController extends AbstractController
 
     public function index()
     {
-        $result = $this->getDB()->fetchAll('SELECT * FROM  users');
-
-        return new Response(print_r($result, true));
+//        $result = $this->getDB()->fetchAll('SELECT * FROM  users');
+//
+//        return new Response(print_r($result, true));
+        return $this->render('base.html.twig');
     }
 }
