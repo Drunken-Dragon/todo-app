@@ -16,7 +16,9 @@ security:
             security: false
         main:
             anonymous: ~
-            http_basic: ~
+            form_login:
+                login_path: login
+                check_path: login
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
     encoders:

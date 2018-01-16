@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LoginController extends AbstractController
 {
     /**
-     * @Route("/login")
+     * @Route("/login", name="login")
      */
     public function loginAction(Request $request)
     {
