@@ -27,9 +27,54 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
+    private $isActive;
+
     public function __construct($name, $password)
     {
         $this->name = $name;
         $this->password = $password;
+        $this->isActive = true;
+    }
+
+    public function getUsername()
+    {
+        return $this->name;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->name,
+            $this->password,
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->name,
+            $this->password,
+            ) = $this->unserialize($serialized);
     }
 }
