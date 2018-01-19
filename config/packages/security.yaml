@@ -3,10 +3,8 @@ security:
     encoders:
         App\Entity\User: bcrypt
     providers:
-        database:
-            entity:
-                  class: App\Entity\User
-                  property: name
+        webservice:
+            id: App\Entity\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -16,7 +14,6 @@ security:
             form_login:
                 login_path: /login
                 check_path: /login
-            provider: database
             logout:
                 path: /logout
     access_control:

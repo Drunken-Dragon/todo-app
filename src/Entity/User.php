@@ -3,12 +3,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="users")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable, EquatableInterface
 {
     /**
      * @ORM\Id
@@ -76,5 +77,14 @@ class User implements UserInterface, \Serializable
             $this->name,
             $this->password,
             ) = $this->unserialize($serialized);
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if ($user instanceof self) {
+            return $this->name === $user->name && $this->password === $user->password;
+        }
+
+        return false;
     }
 }
