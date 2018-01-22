@@ -18,11 +18,11 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/admin")
+     * @Route("/logout")
      */
 
-    public function admin()
+    public function logout()
     {
-        return $this->render('base.html.twig');
+        return $this->redirect('/');
     }
 }
