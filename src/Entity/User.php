@@ -26,9 +26,22 @@ class User
      */
     private $password;
 
+    private $isActive;
+
     public function __construct($name, $password)
     {
         $this->name = $name;
         $this->password = $password;
+        $this->isActive = true;
+    }
+
+    public function getUsername()
+    {
+        return $this->name;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
     }
 }

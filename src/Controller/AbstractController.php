@@ -14,5 +14,4 @@ abstract class AbstractController extends SymfonyController
     {
         return $this->getDoctrine()->getManager();
     }
-
 }
