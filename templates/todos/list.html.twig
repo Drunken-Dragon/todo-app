@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Todo</th>
+            <th scope="col">Assigned to</th>
+            <th scope="col">Due date</th>
+            <th scope="col">Details</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Finish the project</td>
+            <td>Jan</td>
+            <td>ASAP</td>
+            <td>Task no. 12</td>
+            <td>
+                <a href="/todos/details/1" class="btn btn-info">View details</a>
+                <a href="/todos/edit/1" class="btn btn-secondary">Edit</a>
+                <a href="/todos/details/1" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

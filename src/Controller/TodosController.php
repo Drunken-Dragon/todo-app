@@ -14,7 +14,7 @@ class TodosController extends Controller
      */
     public function todosList()
     {
-        return $this->render('base.html.twig');
+        return $this->render('todos/list.html.twig');
     }
     /**
      * @Route("/todos/new")
