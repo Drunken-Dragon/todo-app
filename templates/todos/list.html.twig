@@ -18,7 +18,7 @@
             <th scope="row">{{ todo.status }}</th>
             <td>{{ todo.todo }}</td>
             <td>{{ todo.assignedTo }}</td>
-            <td>ASAP</td>
+            <td>{{ todo.dueDate|date("jS F Y") }}</td>
             <td>{{ todo.details }}</td>
             <td>
                 <a href="/todos/details/{{ todo.id }}" class="btn btn-outline-info">View details</a>

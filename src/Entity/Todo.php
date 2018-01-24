@@ -38,7 +38,7 @@ class Todo
     private $details;
 
     /**
-     * @ORM\Column(type="tinyint")
+     * @ORM\Column(type="smallint")
      */
     private $status;
 
