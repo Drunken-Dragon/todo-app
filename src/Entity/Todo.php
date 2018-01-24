@@ -18,12 +18,12 @@ class Todo
     private $id;
 
     /**
-     * @ORM\Column(type="text", length="255")
+     * @ORM\Column(type="text", length=255)
      */
     private $todo;
 
     /**
-     * @ORM\Column(type="text", length="255")
+     * @ORM\Column(type="text", length=255)
      */
     private $assignedTo;
 
@@ -33,7 +33,7 @@ class Todo
     private $dueDate;
 
     /**
-     * @ORM\Column(type="text", length="500")
+     * @ORM\Column(type="text", length=500)
      */
     private $details;
 

@@ -13,18 +13,20 @@
         </tr>
         </thead>
         <tbody>
+        {% for todo in todos %}
         <tr>
-            <th scope="row">1</th>
-            <td>Finish the project</td>
-            <td>Jan</td>
+            <th scope="row">{{ todo.status }}</th>
+            <td>{{ todo.todo }}</td>
+            <td>{{ todo.assignedTo }}</td>
             <td>ASAP</td>
-            <td>Task no. 12</td>
+            <td>{{ todo.details }}</td>
             <td>
-                <a href="/todos/details/1" class="btn btn-outline-info">View details</a>
-                <a href="/todos/edit/1" class="btn btn-outline-secondary">Edit</a>
-                <a href="/todos/details/1" class="btn btn-outline-danger">Delete</a>
+                <a href="/todos/details/{{ todo.id }}" class="btn btn-outline-info">View details</a>
+                <a href="/todos/edit/{{ todo.id }}" class="btn btn-outline-secondary">Edit</a>
+                <a href="/todos/delete/{{ todo.id }}" class="btn btn-outline-danger">Delete</a>
             </td>
         </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}

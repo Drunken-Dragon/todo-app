@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Todo;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class TodosController extends AbstractController
 {
@@ -13,9 +15,12 @@ class TodosController extends AbstractController
      */
     public function todosList()
     {
-        $data = $this->getDB()->fetchAll('SELECT * FROM todos');
-        var_dump($data);die();
-        return $this->render('todos/list.html.twig');
+        $todos = $this->getDoctrine()
+            ->getRepository(Todo::class)
+            ->findAll();
+        return $this->render('todos/list.html.twig', [
+            'todos' => $todos
+        ]);
     }
     /**
      * @Route("/todos/new")
