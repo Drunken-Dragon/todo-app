@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    DETAILS HERE
+    <h2 class="page-header">{{ todo.todo }}</h2>
+    <hr>
+    <ul class="list-group">
+        <li class="list-group-item">{{ todo.details }}</li>
+    </ul>
+    <hr>
+    <a href="/todos" class="btn btn-outline-info">Go back</a>
+    </table>
 {% endblock %}

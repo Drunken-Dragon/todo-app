@@ -58,6 +58,11 @@ class TodosController extends AbstractController
      */
     public function todosDetails($id)
     {
-        return $this->render('todos/details.html.twig');
+        $todo = $this->getDoctrine()
+            ->getRepository(Todo::class)
+            ->find($id);
+        return $this->render('todos/details.html.twig', [
+            'todo' => $todo
+        ]);
     }
 }
