@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Todo;
+use App\Form\AddTodoRequest;
+use App\Form\TodoType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,9 +27,24 @@ class TodosController extends AbstractController
     /**
      * @Route("/todos/new")
      */
-    public function todosNew(Request $request)
+    public function todosAdd(Request $request)
     {
-        return $this->render('todos/new.html.twig');
+        $data = new AddTodoRequest();
+        $form = $this->createForm(TodoType::class, $data);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $todo = Todo::create($data->todo, $data->assigned_to, $data->due_date, $data->details, $data->status);
+            $this->getEM()->persist($todo);
+            $this->getEM()->flush();
+
+            return $this->redirect('/todos');
+        }
+
+        return $this->render(
+            'todos/new.html.twig',
+            ['form' => $form->createView()]
+        );
     }
     /**
      * @Route("/todos/edit/{id}")

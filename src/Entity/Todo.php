@@ -38,9 +38,23 @@ class Todo
     private $details;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="text", length=20)
      */
     private $status;
+
+    public static function create($todo, $assignedTo, $dueDate, $details, $status): Todo
+    {
+        return new self($todo, $assignedTo, $dueDate, $details, $status);
+    }
+
+    public function __construct($todo, $assignedTo, $dueDate, $details, $status)
+    {
+        $this->todo = $todo;
+        $this->assignedTo = $assignedTo;
+        $this->dueDate = $dueDate;
+        $this->details = $details;
+        $this->status = $status;
+    }
 
     /**
      * @return mixed
