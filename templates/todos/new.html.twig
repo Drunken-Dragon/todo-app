@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    NEW TODO
+    <form action="#" method="post">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+            <input class="btn btn-primary" type="submit" name="submit" value="Create"><br>
+        {{ form_end(form) }}
+    </form>
 {% endblock %}
