@@ -20,6 +20,7 @@ class TodosController extends AbstractController
         $todos = $this->getDoctrine()
             ->getRepository(Todo::class)
             ->findAll();
+
         return $this->render('todos/list.html.twig', [
             'todos' => $todos
         ]);
@@ -51,7 +52,24 @@ class TodosController extends AbstractController
      */
     public function todosEdit($id, Request $request)
     {
-        return $this->render('todos/edit.html.twig');
+        $todo = $this->getDoctrine()
+            ->getRepository(Todo::class)
+            ->find($id);
+
+        $form = $this->createForm(TodoType::class, $todo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getEM()->persist($todo);
+            $this->getEM()->flush();
+
+            return $this->redirect('/todos');
+        }
+
+        return $this->render(
+            'todos/edit.html.twig',
+            ['form' => $form->createView()]
+        );
     }
     /**
      * @Route("/todos/details/{id}")
@@ -61,6 +79,7 @@ class TodosController extends AbstractController
         $todo = $this->getDoctrine()
             ->getRepository(Todo::class)
             ->find($id);
+
         return $this->render('todos/details.html.twig', [
             'todo' => $todo
         ]);
