@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Todo</th>
+            <th scope="col">Assigned to</th>
+            <th scope="col">Due date</th>
+            <th scope="col">Details</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for todo in todos %}
+        <tr>
+            <th scope="row">{{ todo.status }}</th>
+            <td>{{ todo.todo }}</td>
+            <td>{{ todo.assignedTo }}</td>
+            <td>{{ todo.dueDate|date("jS F Y") }}</td>
+            <td>{{ todo.details }}</td>
+            <td>
+                <a href="/todos/details/{{ todo.id }}" class="btn btn-outline-info">View details</a>
+                <a href="/todos/edit/{{ todo.id }}" class="btn btn-outline-secondary">Edit</a>
+                <a href="/todos/delete/{{ todo.id }}" class="btn btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
