@@ -26,6 +26,12 @@ class User
      */
     private $password;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
+     */
+    private $comments;
+
     private $isActive;
 
     public function __construct($name, $password)

@@ -42,6 +42,12 @@ class Todo
      */
     private $status;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="todo")
+     */
+    private $comments;
+
     public static function create($todo, $assignedTo, $dueDate, $details, $status): Todo
     {
         return new self($todo, $assignedTo, $dueDate, $details, $status);
