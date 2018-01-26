@@ -27,7 +27,7 @@ class Comment
     private $created_at;
 
     /**
-     * @var type
+     * @var
      * @ORM\ManyToOne(targetEntity="App\Entity\Todo", inversedBy="comments")
      */
     private $todo;
