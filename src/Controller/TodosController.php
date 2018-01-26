@@ -39,6 +39,8 @@ class TodosController extends AbstractController
             $this->getEM()->persist($todo);
             $this->getEM()->flush();
 
+            $this->addFlash('notice', 'Todo created');
+
             return $this->redirect('/todos');
         }
 
@@ -63,6 +65,8 @@ class TodosController extends AbstractController
             $this->getEM()->persist($todo);
             $this->getEM()->flush();
 
+            $this->addFlash('notice', 'Todo updated');
+
             return $this->redirect('/todos');
         }
 
@@ -83,5 +87,21 @@ class TodosController extends AbstractController
         return $this->render('todos/details.html.twig', [
             'todo' => $todo
         ]);
+    }
+    /**
+     * @Route("/todos/delete/{id}")
+     */
+    public function todosDelete($id)
+    {
+        $todo = $this->getDoctrine()
+            ->getRepository(Todo::class)
+            ->find($id);
+
+        $this->getEM()->remove($todo);
+        $this->getEM()->flush();
+
+        $this->addFlash('notice', 'Todo deleted');
+
+        return $this->redirect('/todos');
     }
 }
