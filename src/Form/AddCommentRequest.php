@@ -11,4 +11,8 @@ class AddCommentRequest
      * @Assert\Length(min="25", max="500")
      */
     public $comment;
+
+    public $todo;
+
+    public $user;
 }

@@ -11,7 +11,6 @@ use App\Form\TodoType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class TodosController extends AbstractController
 {
     /**
@@ -85,13 +84,15 @@ class TodosController extends AbstractController
         $todo = $this->getDoctrine()
             ->getRepository(Todo::class)
             ->find($id);
+//        dump($todo);
+//        die();
 
         $comment_data = new AddCommentRequest();
         $comment_form = $this->createForm(CommentType::class, $comment_data);
         $comment_form->handleRequest($request);
 
         if ($comment_form->isSubmitted() && $comment_form->isValid()) {
-            $comment = Comment::create($comment_data->comment);
+            $comment = Comment::create($comment_data->comment, $comment_data->todo, $comment_data->user);
             $this->getEM()->persist($comment);
             $this->getEM()->flush();
         }

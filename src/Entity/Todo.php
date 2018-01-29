@@ -43,7 +43,6 @@ class Todo
     private $status;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="todo")
      */
     private $comments;
@@ -148,5 +147,13 @@ class Todo
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

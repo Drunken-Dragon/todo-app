@@ -17,9 +17,9 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="text", length=500)
+     * @ORM\Column(name="comment", type="text", length=500)
      */
-    private $comment;
+    private $content;
 
     /**
      * @ORM\Column(type="datetime")
@@ -27,27 +27,26 @@ class Comment
     private $created_at;
 
     /**
-     * @var
      * @ORM\ManyToOne(targetEntity="App\Entity\Todo", inversedBy="comments")
      */
     private $todo;
 
     /**
-     * @var
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
-     *
      */
     private $user;
 
-    public static function create($comment):Comment
+    public static function create($comment, $todo, $user) : Comment
     {
-        return new self($comment);
+        return new self($comment, $todo, $user, new \DateTime('now'));
     }
     
-    public function __construct($comment)
+    public function __construct(string $content, Todo $todo, User $user, \DateTimeInterface $createdAt)
     {
-        $this->comment = $comment;
-        $this->created_at = new \DateTime('now');
+        $this->content = $content;
+        $this->todo = $todo;
+        $this->user = $user;
+        $this->created_at = $createdAt;
     }
 
     /**
@@ -63,15 +62,15 @@ class Comment
      */
     public function getComment()
     {
-        return $this->comment;
+        return $this->content;
     }
 
     /**
      * @param mixed $comment
      */
-    public function setComment($comment)
+    public function setComment($content)
     {
-        $this->comment = $comment;
+        $this->content = $content;
     }
 
     /**
