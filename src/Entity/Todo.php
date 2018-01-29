@@ -28,7 +28,7 @@ class Todo
     private $assignedTo;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dueDate;
 
