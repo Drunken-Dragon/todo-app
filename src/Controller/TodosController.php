@@ -87,7 +87,7 @@ class TodosController extends AbstractController
 //        dump($todo);
 //        die();
 
-        $comment_data = new AddCommentRequest();
+        $comment_data = new AddCommentRequest($todo, $this->getUser());
         $comment_form = $this->createForm(CommentType::class, $comment_data);
         $comment_form->handleRequest($request);
 

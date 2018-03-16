@@ -1,10 +1,12 @@
 security:
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     encoders:
-        App\Security\User: bcrypt
+        App\Entity\User: bcrypt
     providers:
-        webservice:
-            id: App\Security\UserProvider
+        database:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
