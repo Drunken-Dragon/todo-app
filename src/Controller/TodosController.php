@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Todo;
+use App\Form\AddCommentRequest;
 use App\Form\AddTodoRequest;
+use App\Form\CommentType;
 use App\Form\TodoType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 class TodosController extends AbstractController
 {
@@ -78,15 +79,31 @@ class TodosController extends AbstractController
     /**
      * @Route("/todos/details/{id}")
      */
-    public function todosDetails($id)
+    public function todosDetails($id, Request $request)
     {
         $todo = $this->getDoctrine()
             ->getRepository(Todo::class)
             ->find($id);
+//        dump($todo);
+//        die();
 
-        return $this->render('todos/details.html.twig', [
-            'todo' => $todo
-        ]);
+        $comment_data = new AddCommentRequest($todo, $this->getUser());
+        $comment_form = $this->createForm(CommentType::class, $comment_data);
+        $comment_form->handleRequest($request);
+
+        if ($comment_form->isSubmitted() && $comment_form->isValid()) {
+            $comment = Comment::create($comment_data->comment, $comment_data->todo, $comment_data->user);
+            $this->getEM()->persist($comment);
+            $this->getEM()->flush();
+        }
+
+        return $this->render(
+            'todos/details.html.twig',
+            [
+                'todo' => $todo,
+                'form' => $comment_form->createView()
+            ]
+        );
     }
     /**
      * @Route("/todos/delete/{id}")

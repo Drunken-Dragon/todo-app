@@ -28,7 +28,7 @@ class Todo
     private $assignedTo;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dueDate;
 
@@ -41,6 +41,11 @@ class Todo
      * @ORM\Column(type="text", length=20)
      */
     private $status;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="todo")
+     */
+    private $comments;
 
     public static function create($todo, $assignedTo, $dueDate, $details, $status): Todo
     {
@@ -142,5 +147,13 @@ class Todo
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
